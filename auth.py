@@ -8,10 +8,21 @@ auth = Blueprint('auth', __name__)
 
 
 
-@auth.route('/login')
+@auth.route('/login', methods=['POST'])
 def login():
-    #login page code here
-    pass
+    email = request.form.get('email')
+    password = request.form.get('password')
+    remember = True if request.form.get('remember') else False
+
+    user = User.query.filter_by(email=email).first()
+
+    if not user or not check_password_hash(user.password, password):
+        flash('Please check your login details and try again.')
+        return redirect(url_for('auth.login'))
+    
+    login_user(user, remember=remember)
+
+    return redirect(url_for('app.profile'))
 
 @auth.route('/register', methods=['POST'])
 def register():
