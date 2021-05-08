@@ -47,15 +47,15 @@ export default {
   props: {
     title: {
       type: String,
-      default: "Vue MD"
+      default: "BotArena"
     },
     sidebarBackgroundImage: {
       type: String,
-      default: require("@/assets/img/sidebar-2.jpg")
+      default: require("@/assets/img/bot-sidebar.png")
     },
     imgLogo: {
       type: String,
-      default: require("@/assets/img/vue-logo.png")
+      default: require("@/assets/img/bot-logo.png")
     },
     sidebarItemColor: {
       type: String,

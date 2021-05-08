@@ -182,17 +182,6 @@
         padding: $padding-base 0;
         z-index: 4;
 
-        &:after{
-            content: '';
-            position: absolute;
-            bottom: 0;
-            right: 15px;
-            height: 1px;
-            width: calc(100% - 30px);
-            background-color: rgba(180,180,180, .3);
-
-        }
-
         p{
             float: left;
             font-size: 20px;
@@ -231,14 +220,14 @@
               width: 40px;
               display: inline-block;
               height: 40px;
-              background: $white-color;
+              background: #FFDE59;
               border-radius: 50%;
               text-align: center;
               overflow: hidden;
               @include shadow-big();
 
                 img{
-                  width: 55%;
+                  width: 80%;
                   vertical-align: -webkit-baseline-middle;
                 }
             }
