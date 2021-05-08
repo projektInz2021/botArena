@@ -17,6 +17,23 @@ Use botArena API and our in-app editor to program your bot's behaviour and let i
 Project is created with:
 * AWS Web Services
 * Flask
+* Vue.js (Vue Material Dashboard)
 	
 ## Setup
 Setup information (#tbd)
+### Frontend setup
+To run frontend application locally:
+* Clone therepository
+* Change directory to _frontend_ using
+```
+cd frontend
+```
+*  Install dependencies
+```
+npm install
+```
+* Run the local development server
+```
+npm run dev
+```
+For more information and UI kit documentation visit https://demos.creative-tim.com/vue-material-dashboard/documentation/ 
