@@ -19,15 +19,15 @@
         <md-icon>content_paste</md-icon>
         <p>Score boards</p>
       </sidebar-link>
-      <!-- <sidebar-link to="/typography">
-        <md-icon>library_books</md-icon>
-        <p>Typography</p>
+      <sidebar-link to="/typography">
+        <md-icon>sports_esports</md-icon>
+        <p>Battles</p>
       </sidebar-link>
       <sidebar-link to="/icons">
-        <md-icon>bubble_chart</md-icon>
-        <p>Icons</p>
+        <md-icon>api</md-icon>
+        <p>Documentation</p>
       </sidebar-link>
-      <sidebar-link to="/maps">
+      <!-- <sidebar-link to="/maps">
         <md-icon>location_on</md-icon>
         <p>Maps</p>
       </sidebar-link>
@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       sidebarBackground: "green",
-      sidebarBackgroundImage: require("@/assets/img/bot-sidebar.png")
+      sidebarBackgroundImage: require("@/assets/img/bot-sidebar-2.png")
     };
   }
 };
