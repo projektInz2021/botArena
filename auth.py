@@ -23,7 +23,7 @@ def login():
     
     login_user(user, remember=remember)
 
-    return redirect(url_for('app.profile'))
+    return redirect(url_for('app.profile/{user.name}'))
 
 @auth.route('/register', methods=['POST'])
 def register():
