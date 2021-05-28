@@ -1,15 +1,17 @@
 from flask import Flask, render_template
-from flask_login import login_required, current_user
+from flask_login import login_required, LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from config import TestingConfig
+import auth
 
 app = Flask(__name__)
+app.register_blueprint(auth.authorize)
+CORS(app)
 test=TestingConfig()
 app.config.from_object(test)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
-CORS(app)
 
 @app.route('/')
 def home():
@@ -27,4 +29,7 @@ def userProfile(user_name):
     pass
 
 if __name__ == '__main__':
+    login_manager = LoginManager(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'authorize.login'
     app.run()

@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy(app)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+db = SQLAlchemy(app)
 
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer, primary_key=True)
