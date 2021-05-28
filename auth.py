@@ -5,8 +5,6 @@ import models
 
 authorize = Blueprint('authorize', __name__,template_folder='templates')
 
-from app import db
-
 @authorize.route('/login', methods=['GET','POST'])
 def login():
     if request.method=='GET':

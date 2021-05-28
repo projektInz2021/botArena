@@ -8,14 +8,15 @@ import auth
 app = Flask(__name__)
 app.register_blueprint(auth.authorize)
 CORS(app)
+db = SQLAlchemy(app)
 test=TestingConfig()
 app.config.from_object(test)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+
 
 @app.route('/')
 def home():
-    return render_template("index.html",message="Work in progress...")
+    return render_template("index.html")
 
 @app.route('/<user_name>')
 @login_required
