@@ -6,12 +6,12 @@
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="notification is-danger">
-                    {{ messages[0] }}. Go to <a href="{{ url_for('auth.login') }}">login page</a>.
+                    {{ messages[0] }}. Go to <a href="{{ url_for('authorize.login') }}">login page</a>.
                 </div>
             {% endif %}
             {% endwith %}
             <div>
-                <form method="POST" action="/signup">
+                <form method="POST" action="/register">
                     <div>
                         <div>
                             <input type="email" name="email" placeholder="Email" autofocus="">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
         
-                    <button">Sign Up</button>
+                    <button>"Sign Up"</button>
                 </form>
             </div>
         </div>

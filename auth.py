@@ -26,27 +26,30 @@ def login():
 
         return redirect(url_for('app.profile/{user.name}'))
 
-@authorize.route('/register', methods=['POST'])
+@authorize.route('/register', methods=['GET','POST'])
 def register():
-    email = request.form.get('email')
-    name = request.form.get('name')
-    password = request.form.get('password')
+    if request.method=='GET':
+        return render_template('register.html')
+    else:
+        email = request.form.get('email')
+        name = request.form.get('name')
+        password = request.form.get('password')
 
-    user = models.User.query.filter_by(email=email).first()
+        user = models.User.query.filter_by(email=email).first()
 
-    if user:
-        return redirect(url_for('authorize.register'))
+        if user:
+            return redirect(url_for('authorize.register'))
 
-    new_user = models.User(email=email, name=name, password=sha256_crypt.encrypt(password))
+        new_user = models.User(email=email, name=name, password=sha256_crypt.encrypt(password))
 
-    db.session.add(new_user)
-    db.session.commit()
+        db.session.add(new_user)
+        db.session.commit()
 
-    if user:
-        flash('Email address already exists')
-        return redirect(url_for('authorize.register'))
+        if user:
+            flash('Email address already exists')
+            return redirect(url_for('authorize.register'))
 
-    return redirect(url_for('authorize.login'))
+        return redirect(url_for('authorize.login'))
 
 @authorize.route('/logout')
 @login_required
