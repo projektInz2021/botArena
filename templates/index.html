@@ -5,7 +5,8 @@
   </head>
   <body>
     <div>
-      <p>{{ message }}</p>
+      <button><a href="{{ url_for('authorize.login') }}">login</button>
+      <button><a href="{{ url_for('authorize.register') }}">or register</button>
     </div>
   </body>
 </html>
