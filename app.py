@@ -1,10 +1,12 @@
 from flask import Flask, render_template
 from flask_login import login_required, current_user
+from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
-import os
+from config import TestingConfig
 
 app = Flask(__name__)
-app.config.from_object(os.environ['APP_SETTINGS'])
+test=TestingConfig()
+app.config.from_object(test)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)

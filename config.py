@@ -7,7 +7,7 @@ class Config(object):
     TESTING = False
     CSRF_ENABLED = True
     SECRET_KEY = 'this-really-needs-to-be-changed'
-    SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = os.environ['http://arenadb.co6z0sqrwegt.eu-central-1.rds.amazonaws.com/postgres']
 
 
 class ProductionConfig(Config):
