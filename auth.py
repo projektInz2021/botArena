@@ -1,53 +1,57 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, redirect, url_for, request, flash, render_template
 from flask_login import login_user, logout_user, login_required
-from werkzeug.security import generate_password_hash, check_password_hash
-from .models import User
-from . import db
+from passlib.hash import sha256_crypt
+import models
 
-auth = Blueprint('auth', __name__)
+authorize = Blueprint('authorize', __name__,template_folder='templates')
 
+from app import db
 
-
-
-@auth.route('/login', methods=['POST'])
+@authorize.route('/login', methods=['GET','POST'])
 def login():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    remember = True if request.form.get('remember') else False
+    if request.method=='GET':
+        return render_template('login.html')
+    else:
+        email = request.form.get('email')
+        password = request.form.get('password')
+        remember = True if request.form.get('remember') else False
 
-    user = User.query.filter_by(email=email).first()
+        user = models.User.query.filter_by(email=email).first()
 
-    if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
-        return redirect(url_for('auth.login'))
-    
-    login_user(user, remember=remember)
+        if not user or not sha256_crypt.verify(user.password, password):
+            flash('Please check your login details and try again.')
+            return redirect(url_for('authorize.login'))
+        
+        login_user(user, remember=remember)
 
-    return redirect(url_for('app.profile/{user.name}'))
+        return redirect(url_for('app.profile/{user.name}'))
 
-@auth.route('/register', methods=['POST'])
+@authorize.route('/register', methods=['GET','POST'])
 def register():
-    email = request.form.get('email')
-    name = request.form.get('name')
-    password = request.form.get('password')
+    if request.method=='GET':
+        return render_template('register.html')
+    else:
+        email = request.form.get('email')
+        name = request.form.get('name')
+        password = request.form.get('password')
 
-    user = User.query.filter_by(email=email).first()
+        user = models.User.query.filter_by(email=email).first()
 
-    if user:
-        return redirect(url_for('auth.register'))
+        if user:
+            return redirect(url_for('authorize.register'))
 
-    new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+        new_user = models.User(email=email, name=name, password=sha256_crypt.encrypt(password))
 
-    db.session.add(new_user)
-    db.session.commit()
+        db.session.add(new_user)
+        db.session.commit()
 
-    if user:
-        flash('Email address already exists')
-        return redirect(url_for('auth.register'))
+        if user:
+            flash('Email address already exists')
+            return redirect(url_for('authorize.register'))
 
-    return redirect(url_for('auth.login'))
+        return redirect(url_for('authorize.login'))
 
-@auth.route('/logout')
+@authorize.route('/logout')
 @login_required
 def logout():
     logout_user()
