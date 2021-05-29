@@ -36,4 +36,24 @@ npm install
 ```
 npm run dev
 ```
+### Backend setup
+To run backend application locally:
+* Clone therepository
+* Change directory to _botArena_ using
+```
+cd botArena
+```
+*  Install dependencies
+```
+pip install Flask Flask-Login Flask-Cors passlib Flask-Sqlalchemy
+```
+* Initialize and run migrations
+```
+python manage.py db init
+python manage.py db upgrade
+```
+* Run app
+```
+python app.py
+```
 For more information and UI kit documentation visit https://demos.creative-tim.com/vue-material-dashboard/documentation/ 
